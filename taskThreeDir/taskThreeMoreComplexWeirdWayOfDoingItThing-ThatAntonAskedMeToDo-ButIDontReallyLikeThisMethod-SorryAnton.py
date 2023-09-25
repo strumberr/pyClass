@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime, timedelta
+import numpy as np
 
 
 
@@ -30,30 +31,11 @@ try:
         temp_array = data["hourly"]["temperature_2m"]
         hourly_array = data["hourly"]["time"]
 
-        new_temp_array = []
-
-        temp_day_week = {}
-
-        group_size = 24
-        
-
-        for i in range(0, len(temp_array), group_size):
-
-            group = temp_array[i:i + group_size]
-
-            new_temp_array.append(group)
-
-        for tempMax, day in zip(new_temp_array, dates_list):
-            formatted_date = day.strftime("%d %A")
-            maxTemperature = max(tempMax)
-            # max_index = new_temp_array.index(maxTemperature)
-            temp_day_week[formatted_date] = max(tempMax)
+        max_temp = np.max(temp_array)
+        max_temp_index = np.where(temp_array == max_temp)[0][0]
 
 
-        for el in temp_day_week:
-            print(f"{el}: {temp_day_week[el]}")
-
-
+        print(f"The highest temperature is {max_temp}°C at {hourly_array[max_temp_index]}")
 
     else:
         print(f"Request failed with status code: {response.status_code}")
