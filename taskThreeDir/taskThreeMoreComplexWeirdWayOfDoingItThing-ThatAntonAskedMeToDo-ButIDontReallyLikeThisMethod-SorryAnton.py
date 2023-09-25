@@ -28,6 +28,7 @@ try:
         data = response.json()
         
         temp_array = data["hourly"]["temperature_2m"]
+        hourly_array = data["hourly"]["time"]
 
         new_temp_array = []
 
@@ -44,6 +45,8 @@ try:
 
         for tempMax, day in zip(new_temp_array, dates_list):
             formatted_date = day.strftime("%d %A")
+            maxTemperature = max(tempMax)
+            # max_index = new_temp_array.index(maxTemperature)
             temp_day_week[formatted_date] = max(tempMax)
 
 
