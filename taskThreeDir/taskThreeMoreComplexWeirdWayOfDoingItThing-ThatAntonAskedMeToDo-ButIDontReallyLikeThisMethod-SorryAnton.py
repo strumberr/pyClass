@@ -16,7 +16,7 @@ today = datetime.now().date()
 # Create a list with today and the next 7 days
 dates_list = [today + timedelta(days=i) for i in range(8)]
 
-api_url = f"https://api.open-meteo.com/v1/forecast?latitude=13.754&longitude=100.5014&hourly=temperature_2m&start_date={current_day_str}&end_date={one_week_from_now_str}"
+api_url = f"https://api.open-meteo.com/v1/forecast?latitude=13.754&longitude=100.5014&hourly=temperature_2m&timezone=Asia%2FBangkok&start_date={current_day_str}&end_date={one_week_from_now_str}"
 
 print(api_url)
 
